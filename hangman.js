@@ -5,27 +5,22 @@ const wordPool = ['banana', 'strawberry', 'potato']; //Sheep Shrimp Lobster Swor
 let randomWord = '';
 const hiddenRandomWord = [];
 const wrongLettersSet = new Set();
-const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 let life = 3;
-let playerName
-console.clear()
+let playerName;
+console.clear();
 function getPlayerName() {
     playerName = (prompt('Type your name, then press enter: ')).toUpperCase();
 }
 
 function visualizeStartScreen() {
-console.log("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-console.log("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-console.log("        GREETINGS CONVICT " + playerName + "! WELCOME TO THE GAME OF\n\n    O   O    OOO    O   O    OOO    O   O    OOO    O   O⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣶⡏\n    O   O   O   O   O   O   O   O   OO OO   O   O   O   O⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣧\n    O   O   O   O   OO  O   O   O   O O O   O   O   OO  O⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣧\n    O   O   O   O   OO  O   O   O   O O O   O   O   OO  O⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿\n    O   O   O   O   OO  O   O   O   O O O   O   O   OO  O⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆\n    O   O   O   O   O O O   O       O O O   O   O   O O O⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⠛⢿⣿⣿⣿⣿⣿⡿⢻⡇\n    OOOOO   OOOOO   O O O   O OOO   O O O   OOOOO   O O O⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣧⣤⣤⣿⣿⣿⣤⣤⣾⡇\n    O   O   O   O   O O O   O O O   O   O   O   O   O O O⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷\n    O   O   O   O   O  OO   O   O   O   O   O   O   O  OO⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣄\n    O   O   O   O   O  OO   O   O   O   O   O   O   O  OO⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⣀⠀\n    O   O   O   O   O  OO   O   O   O   O   O   O   O  OO⠀⠀⠰⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠆\n    O   O   O   O   O   O   O   O   O   O   O   O   O   O⠀⠀⠀⠉⠉⠈⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⡉⠈⠉\n    O   O   O   O   O   O    OOO    O   O   O   O   O   O ⠀⠀⠀⠀⠀⠀⠚⠿⠟⠁⠉⣻⣿⡟⠉⠉⠻⣿⣿⣏⠁⠈⠻⠿⠛\n\n    A TERMINALLY DEADLY GAME! DIRECTLY IN THE TERMINAL!");
+    console.log("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+    console.log("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+    console.log("        GREETINGS CONVICT " + playerName + "! WELCOME TO THE GAME OF\n\n    O   O    OOO    O   O    OOO    O   O    OOO    O   O⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣶⡏\n    O   O   O   O   O   O   O   O   OO OO   O   O   O   O⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣧\n    O   O   O   O   OO  O   O   O   O O O   O   O   OO  O⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣧\n    O   O   O   O   OO  O   O   O   O O O   O   O   OO  O⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿\n    O   O   O   O   OO  O   O   O   O O O   O   O   OO  O⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆\n    O   O   O   O   O O O   O       O O O   O   O   O O O⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⠛⢿⣿⣿⣿⣿⣿⡿⢻⡇\n    OOOOO   OOOOO   O O O   O OOO   O O O   OOOOO   O O O⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣧⣤⣤⣿⣿⣿⣤⣤⣾⡇\n    O   O   O   O   O O O   O O O   O   O   O   O   O O O⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷\n    O   O   O   O   O  OO   O   O   O   O   O   O   O  OO⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣄\n    O   O   O   O   O  OO   O   O   O   O   O   O   O  OO⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⣀⠀\n    O   O   O   O   O  OO   O   O   O   O   O   O   O  OO⠀⠀⠰⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠆\n    O   O   O   O   O   O   O   O   O   O   O   O   O   O⠀⠀⠀⠉⠉⠈⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⡉⠈⠉\n    O   O   O   O   O   O    OOO    O   O   O   O   O   O ⠀⠀⠀⠀⠀⠀⠚⠿⠟⠁⠉⣻⣿⡟⠉⠉⠻⣿⣿⣏⠁⠈⠻⠿⠛\n\n    A TERMINALLY DEADLY GAME! DIRECTLY IN THE TERMINAL!");
     //prompt('Press any key to continue...');
     console.log("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
     console.log("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
 
 }
-function displayByeScreen() {
-    console.log('⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡤⠒⠒⠢⢄⡀⠀⠀⢠⡏⠉⠉⠉⠑⠒⠤⣀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡞⠀⠀⠀⠀⠀⠙⢦⠀⡇⡇⠀⠀⠀⠀⠀⠀⠈⠱⡀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠊⠉⠉⠙⠒⢤⡀⠀⣼⠀⠀⢀⣶⣤⠀⠀⠀⢣⡇⡇⠀⠀⢴⣶⣦⠀⠀⠀⢳\n⠀⠀⠀⢀⣠⠤⢄⠀⠀⢰⡇⠀⠀⣠⣀⠀⠀⠈⢦⡿⡀⠀⠈⡟⣟⡇⠀⠀⢸⡇⡆⠀⠀⡼⢻⣠⠀⠀⠀⣸\n⠀⢀⠖⠉⠀⠀⠀⣱⡀⡞⡇⠀⠀⣿⣿⢣⠀⠀⠈⣧⣣⠀⠀⠉⠋⠀⠀⠀⣸⡇⠇⠀⠀⠈⠉⠀⠀⠀⢀⡏\n⣠⠏⠀⠀⣴⢴⣿⣿⠗⢷⡹⡀⠀⠘⠾⠾⠀⠀⠀⣿⣿⣧⡀⠀⠀⠀⢀⣴⠇⣇⣆⣀⢀⣀⣀⣀⣀⣤⠟\n⣿⠀⠀⢸⢻⡞⠋⠀⠀⠀⢿⣷⣄⠀⠀⠀⠀⠀⣠⡇⠙⢿⣽⣷⣶⣶⣿⠋⢰⣿⣿⣿⣿⣿⣿⠿⠛⠁\n⡿⡄⠀⠈⢻⣝⣶⣶⠀⠀⠀⣿⣿⣱⣶⣶⣶⣾⡟⠀⠀⠀⢈⡉⠉⢩⡖⠒⠈⠉⡏⡴⡏⠉⠉⠉⠉⠉⠉⠉⠉⡇⠀⠀⢀⣴⠒⠢⠤⣀\n⢣⣸⣆⡀⠀⠈⠉⠁⠀⠀⣠⣷⠈⠙⠛⠛⠛⠉⢀⣴⡊⠉⠁⠈⢢⣿⠀⠀⠀⢸⠡⠀⠁⠀⠀⠀⣠⣀⣀⣀⣀⡇⠀⢰⢁⡇⠀⠀⠀⢠\n ⠻⣿⣟⢦⣤⡤⣤⣴⣾⡿⢃⡠⠔⠒⠉⠛⠢⣾⢿⣿⣦⡀⠀⠀⠉⠀⠀⢀⡇⢸⠀⠀⠀⠀⠀⠿⠿⠿⣿⡟⠀⢀⠇⢸⠀⠀⠀⠀⠘\n⠀⠀⠈⠙⠛⠿⠿⠿⠛⠋⢰⡋⠀⠀⢠⣤⡄⠀⠈⡆⠙⢿⣿⣦⣀⠀⠀⠀⣜⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⢀⠃⠀⡸⠀⠇\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⢣⠀⠀⠈⠛⠁⠀⢴⠥⡀⠀⠙⢿⡿⡆⠀⠀⢸⠀⢸⢰⠀⠀⠀⢀⣿⣶⣶⡾⠀⢀⠇⣸\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⡀⢇⠀⠀⠀⢀⡀⠀⠀⠈⢢⠀⠀⢃⢱⠀⠀⠀⡇⢸⢸⠀⠀⠀⠈⠉⠉⠉⢱⠀⠼⣾⣿⣿⣷⣦⠴\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢱⠘⡄⠀⠀⢹⣿⡇⠀⠀⠈⡆⠀⢸⠈⡇⢀⣀⣵⢨⣸⣦⣤⣤⣄⣀⣀⣀⡞⠀⣠⡞⠉⠈⠉⢣⡀\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢃⠘⡄⠀⠀⠉⠀⠀⣠⣾⠁⠀⠀⣧⣿⣿⡿⠃⠸⠿⣿⣿⣿⣿⣿⣿⠟⠁⣼⣾⠀⠀⠀⠀⢠⠇\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡄⠹⣀⣀⣤⣶⣿⡿⠃⠀⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠁⠀⠀⢻⣿⣷⣦⣤⣤⠎\n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣤⣿⡿⠟⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉')
-}
-
 function setRandomWord() {
     randomWord = wordPool[Math.floor(Math.random() * wordPool.length)];
     for (let i = 0; i < randomWord.length; i++) {
@@ -34,14 +29,17 @@ function setRandomWord() {
 }
 
 function visualizeGallows(life) {
+    if (life === 3) {
+        return console.log("        _______\n        | /              _\n        |/   __         /\\\n        |   (oo)    _|\\/**\\/|\n        |   /[]\\   | | [  ] O\n        |    ||        _||_");
+    }
     if (life === 2) {
-        return console.log('_______ \n| /  |_  ');
+        return console.log("        _______\n        | /  __     _\n        |/  (¤¤)   /\\ \n        |   /[]\\ \\/**\\/|\n        |   |_=   [  ] O\n        |   | |   _||_");
     }
     if (life === 1) {
-        return console.log('_______ \n| /  |_  \n|/  (xx)\n|   |[]| ');
+        return console.log("        _______\n        | /  |_     _\n        |/  (@@)   /\\ \n        |   /[]\\  /**\\ \n        |   |_=  |[  ]|\n        |   | |   _||_");
     }
     if (life < 1) {
-        return console.log('_______ \n| /  |_  \n|/  (xx)\n|   |[]| \n|    || \n|        ');
+        return console.log("        _______\n        | /  |_     _\n        |/  (xx)   /\\  |_\n        |   /[]\\  /**\\/| |\n        |    ||  |[  ]\n        |         _||_");
     }
 }
 
@@ -59,6 +57,9 @@ function visualizeDefeat() {
 
 function runGameFlow() {
     do {
+        console.log(`Wrong guesses: ${[...wrongLettersSet]}`);
+        console.log(`Life remaining: ${life}`);
+        visualizeGallows(life);
         console.log(`\n\n${hiddenRandomWord}`);
         if (randomWord === hiddenRandomWord.join('')) {
             console.log(visualizeVictory());
@@ -79,17 +80,15 @@ function runGameFlow() {
                 hiddenRandomWord[i] = guessedLetter;
             }
         }
-        if (!randomWord.includes(guessedLetter)) {
+        if (!randomWord.includes(guessedLetter)  && ![...wrongLettersSet].includes(guessedLetter)) {
             wrongLettersSet.add(guessedLetter);
             life--;
-            visualizeGallows(life);
         }
-        console.log(`Wrong guesses: ${[...wrongLettersSet]}`);
-        console.log(`Life remaining: ${life}`);
+        console.clear();
     } while (true);
 }
 
-getPlayerName()
+getPlayerName();
 visualizeStartScreen();
 setRandomWord();
 runGameFlow();
