@@ -35,19 +35,10 @@ function displayGallowsTree(life) {
   }
 }
 
-
-function isGameOver(life, randomWord, hiddenRandomWord) {
-  if (randomWord === hiddenRandomWord && life > 0) {
-    return console.log('Game over, you survived, congratulations!');
-  }
-  if (life < 1) {
-    return console.log('Game over, you died, rest in peace!');
-  }
-}
-
 displayStartScreen();
 setRandomWord();
 do {
+
   const playerInput = prompt('Type a letter, then press enter: ');
   const guessedLetter = playerInput[0];
   for (let i = 0; i < randomWord.length; i++) {
@@ -59,7 +50,6 @@ do {
     wrongLettersSet.add(guessedLetter);
     life--;
     displayGallowsTree(life);
-//    isGameOver(life, randomWord, hiddenRandomWord);
   }
   console.log(`\n\n${  hiddenRandomWord}`);
   console.log(`Wrong guesses: ${  [...wrongLettersSet]}`);
